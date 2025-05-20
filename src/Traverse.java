@@ -28,6 +28,68 @@ public class Traverse {
     v45.neighbors = new ArrayList<>(List.of(v23));
     v23.neighbors = new ArrayList<>(List.of());
     v67.neighbors = new ArrayList<>(List.of(v91));
-  }
+    
+    int result = sum(v3);
 
-}
+    System.out.println(result);
+
+  }//end main
+
+  public static int sum(Vertex<Integer> current){
+
+  Set<Vertex<Integer>> visited = new HashSet<>();
+
+  return sum(current, visited);
+  }//end sum
+
+
+public static int sum(Vertex<Integer> current, Set<Vertex<Integer>> visited){
+
+  if (current == null || visited.contains(current)) return 0;
+
+  visited.add(current);
+
+  int total = 0;
+  total += current.data;
+
+  for(Vertex<Integer> neighbor : current.neighbors){
+
+    int neighborSum = sum(neighbor, visited);
+    
+    total += neighborSum;
+
+  }//end for
+
+  return total;
+}//end sumHelper
+
+  public static <T> void traverse(Vertex<T> current){
+
+    Set<Vertex<T>> myVisited = new HashSet<>();
+    traverse(current, myVisited);
+
+  }//end traverse
+
+
+
+  public static <T> void traverse(Vertex<T> current, Set<Vertex<T>> visited){
+
+
+    if (current == null || visited.contains(current)) return;
+
+    System.out.println(current.data);
+    visited.add(current);
+
+    for(Vertex<T> neighbor : current.neighbors){
+
+      traverse(neighbor, visited);
+
+    }//end for
+
+
+
+  }//end traverseHelper
+
+
+  
+}//end file Traverse.java
